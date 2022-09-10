@@ -24,14 +24,15 @@ const TableUser = (props) => {
                                 <td>{item.email}</td>
                                 <td>{item.role}</td>
                                 <td>
-                                    <button className="btn btn-secondary">View</button>
+                                    <button className="btn btn-secondary" onClick={() => props.handleClickViewUser(item)}>View</button>
                                     <button
                                         className="btn btn-warning mx-3" onClick={() => props.handleClickBtnUpdateUser(item)}>
                                         Update
                                     </button>
-                                    <button className="btn btn-danger">Delete</button>
+                                    <button className="btn btn-danger" onClick={() => props.handleClickBtnDeleteUser(item)} >Delete</button>
                                 </td>
                             </tr>
+
                         )
 
                     })}
@@ -44,7 +45,9 @@ const TableUser = (props) => {
                     }
                 </tbody>
             </table>
+
         </>
+
     )
 }
 export default TableUser;
