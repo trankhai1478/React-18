@@ -36,7 +36,10 @@ const deleteUser = (userId) => {
 const getUserWithPaginate = (page, limit) => {
     return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
 }
+const postCreate = () => {
+    return axios.post("/api/create-new-specialty");
+}
 export {
     postCreateNewUser, getAllUsers, putUpdateUser,
-    getViewser, deleteUser, getUserWithPaginate
+    getViewser, deleteUser, getUserWithPaginate,
 }
