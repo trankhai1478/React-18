@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
     .header {
         height: 45px;
         text-align: right;
@@ -51,6 +51,17 @@
 
         .back {
             cursor: pointer;
+        }
+
+        .pass-group {
+            position: relative;
+
+            .icon-eye {
+                cursor: pointer;
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+            }
         }
     }
 }

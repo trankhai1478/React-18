@@ -1,15 +1,49 @@
 import { useState } from 'react';
 import './Login.scss';
+import { useNavigate } from 'react-router-dom';
+import { postLogin } from '../../Service/ApiService';
+
+import { toast } from 'react-toastify';
 const Login = () => {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
-    const handleLogin = () => {
-        alert('login')
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+    const handleLogin = async () => {
+        const isValidEmail = validateEmail(email);
+        if (!isValidEmail) {
+            toast.error("Invalid email")
+            return;
+        }
+        if (!password) {
+            toast.error("Invalid password")
+            return;
+        }
+
+
+        let data = await postLogin(email, password);
+
+        if (data && +data.EC === 0) {
+            toast.success(data.EM);
+            navigate("/");
+
+        }
+        if (data && +data.EC !== 0) {
+            toast.error(data.EM);
+        }
     }
     return (
         <div className="login-container">
             <div className='header'>
-                Dont't have an account yet ?
+                <span>Dont't have an account yet ?</span>
+                <button onClick={() => { navigate('/register') }} >Sign up</button>
+
             </div>
             <div className='title col-4  mx-auto '>
                 TQK-WEB
@@ -42,6 +76,11 @@ const Login = () => {
                         className='btn-submit'
                         onClick={() => handleLogin()}
                     >Login to TQK</button>
+                </div>
+                <div className='text-center'>
+                    <span className='back' onClick={() => { navigate('/') }}>
+                        &#60;&#60;Go back HomePage
+                    </span>
                 </div>
 
             </div>
