@@ -13,9 +13,11 @@ import sidebarBg from '../../assets/bg2.jpg';
 import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
 import './SideBar.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 // import {GiReactor} from 'react-icons';
 const SideBar = (props) => {
+    const navigate = useNavigate();
     const { image, collapsed, toggled, handleToggleSidebar } = props;
     return (
         <>
@@ -41,7 +43,9 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact size={'3em'} color={"00bfff"} />
-                        <span>TQK Dep Trai</span>
+                        <span onClick={() => navigate('/')}>
+
+                            TQK Dep Trai</span>
 
                     </div>
                 </SidebarHeader>
@@ -68,7 +72,9 @@ const SideBar = (props) => {
                                 Quản lý người dùng
                                 <Link to="/admins/manage-users" />
                             </MenuItem>
-                            <MenuItem> Quản lý bài Quiz</MenuItem>
+                            <MenuItem> Quản lý bài Quiz
+                                <Link to="/admins/manage-quizzes" />
+                            </MenuItem>
                             <MenuItem> Quản lý câu hỏi</MenuItem>
                         </SubMenu>
 
