@@ -67,8 +67,22 @@ const postCreateNewQuiz = (description, name, difficulty, image) => {
 const getAllQuizForAdmin = () => {
     return axios.get(`/api/v1/quiz/all`);
 }
+const postCreateNewQuetionForQuiz = (quiz_id, description, image) => {
+    const data = new FormData();
+    data.append('quiz_id', quiz_id);
+    data.append('description', description);
+    data.append('questionImage', image);
+    return axios.post('api/v1/question', data);
+}
+const postCreateNewAnswerForQuestion = (description, correct_answer, question_id) => {
+
+    return axios.post('api/v1/answer', {
+        description, correct_answer, question_id
+    });
+}
 export {
     postCreateNewUser, getAllUsers, putUpdateUser,
     getViewser, deleteUser, getUserWithPaginate, postLogin, postRegister, getQuizByUser,
-    getDataQuizId, postSubmitQuiz, postCreateNewQuiz, getAllQuizForAdmin
+    getDataQuizId, postSubmitQuiz, postCreateNewQuiz, getAllQuizForAdmin, postCreateNewQuetionForQuiz,
+    postCreateNewAnswerForQuestion
 }
