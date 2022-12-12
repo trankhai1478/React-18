@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import './Questions.scss';
+import './QuizQA.scss';
 import { TbHeartPlus } from "react-icons/tb";
 
 import { BsFileMinusFill } from "react-icons/bs";
@@ -12,7 +12,8 @@ import _, { create } from 'lodash';
 import Lightbox from "react-awesome-lightbox";
 import { getAllQuizForAdmin, postCreateNewAnswerForQuestion, postCreateNewQuetionForQuiz } from "../../../../Service/ApiService";
 import { toast } from 'react-toastify';
-const Questions = (props) => {
+import { FETCH_USER_LOGIN_SUCCESS } from '../../../../redux/action/userAction';
+const QuizQA = (props) => {
 
     const initQuestion = [
         {
@@ -31,7 +32,7 @@ const Questions = (props) => {
             ]
         }
     ]
-    const [selectedQuiz, setSelectedQuiz] = useState({});
+
 
     const [questions, setQuestion] = useState(initQuestion);
 
@@ -42,9 +43,14 @@ const Questions = (props) => {
         url: ""
     });
     console.log(">>check questions", questions);
+    const [selectedQuiz, setSelectedQuiz] = useState({});
     const [listQuiz, setListQuiz] = useState([]);
+
+
+
     useEffect(() => {
         fetchQuiz();
+
     }, [])
     const fetchQuiz = async () => {
         let res = await getAllQuizForAdmin();
@@ -60,6 +66,8 @@ const Questions = (props) => {
         }
 
     }
+
+
 
     const handleAddRemoveQuestion = (type, id) => {
         if (type === 'ADD') {
@@ -228,10 +236,7 @@ const Questions = (props) => {
     }
     return (
         <div className="question-container">
-            <div className="title">
-                Manage question
-            </div>
-            <hr />
+
             <div className="add-new-question">
                 <div className='col-6 form-group'>
 
@@ -366,4 +371,4 @@ const Questions = (props) => {
         </div>
     )
 }
-export default Questions;
+export default QuizQA;
