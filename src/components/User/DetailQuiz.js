@@ -43,6 +43,7 @@ const DetailQuiz = (props) => {
                     })
 
                     //answers.questionId = key;
+                    answers = _.orderBy(answers, ['id'], ['asc']);
                     return { questionId: key, answers, questionDescription, image }
                 }
                 )
